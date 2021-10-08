@@ -1,5 +1,4 @@
 LOCAL_PATH := $(call my-dir)
-ifeq ($(call is-vendor-board-platform,QCOM),true)
 
 # HAL module implemenation stored in
 # hw/<POWERS_HARDWARE_MODULE_ID>.<ro.hardware>.so
@@ -12,13 +11,7 @@ LOCAL_SRC_FILES := power-common.c metadata-parser.c utils.c list.c hint-data.c p
 LOCAL_C_INCLUDES := external/libxml2/include \
                     external/icu/icu4c/source/common
 
-ifeq ($(call is-board-platform-in-list,msm8937), true)
 LOCAL_SRC_FILES += power-8952.c
-endif
-
-ifeq ($(call is-board-platform-in-list,msm8953), true)
-LOCAL_SRC_FILES += power-8953.c
-endif
 
 ifeq ($(TARGET_USES_INTERACTION_BOOST),true)
     LOCAL_CFLAGS += -DINTERACTION_BOOST
@@ -30,4 +23,3 @@ LOCAL_CFLAGS += -Wno-unused-parameter -Wno-unused-variable
 LOCAL_VENDOR_MODULE := true
 LOCAL_VINTF_FRAGMENTS := power.xml
 include $(BUILD_EXECUTABLE)
-endif
